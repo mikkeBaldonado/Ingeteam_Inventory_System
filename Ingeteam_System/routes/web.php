@@ -32,26 +32,37 @@ Route::group(array('prefix'=>'administration','middleware' => ['auth', 'admin'])
 		Route::get('/users_record/delete/{id}', ['uses' => 'Auth\RegisterController@destroy', 'as' => 'users_record.delete']);
 
 		//Route::delete('/users_record/delete/{id}', 'Auth\RegisterController@destroy');
-		Route::get('/Equipments/edit/{id}', ['uses' => 'EquipmentsController@edit', 'as' => 'Equipments.edit']);		
-		Route::post('/Equipments/update/{id}', ['uses' => 'EquipmentsController@update', 'as' => 'Equipments.update']);
-	
 
+		
   });
+
+
+Route::get('/archive_users', 'ArchiveUsersController@index')->name('archive_users');
+
+Route::get('/archive_equipments', 'ArchiveUsersController@equipmentsData')->name('archive_equipments');
+
+Route::get('/Equipments/edit/{id}', ['uses' => 'EquipmentsController@edit', 'as' => 'Equipments.edit']);		
+Route::post('/Equipments/update/{id}', ['uses' => 'EquipmentsController@update', 'as' => 'Equipments.update']);
 
 Route::get('/users_record/edit/{id}', ['uses' => 'Auth\RegisterController@edit', 'as' => 'users_record.edit']);		
 Route::post('/users_record/update/{id}', ['uses' => 'Auth\RegisterController@update', 'as' => 'users_record.update']);
 		
+Route::get('/Borrowed/edit/{id}', ['uses' => 'BorrowsController@edit', 'as' => 'Borrowed.edit']);		
+Route::post('/Borrowed/update/{id}', ['uses' => 'BorrowsController@update', 'as' => 'Borrowed.update']);
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('login/custom', ['uses' => 'Auth\LoginController@login', 'as' => 'login.custom']);
 
 Route::get('/users_record', 'UsersRecordController@getData')->name('users_record');
 
-Route::get('/borrowed', 'BorrowsController@index')->name('borrows');
+Route::get('/borrowed', 'BorrowsController@getData')->name('Borrows');
 
 Route::get('/Equipments', 'EquipmentsController@getData')->name('Equipments');
 
 Route::get('/Reports', 'EquipmentsController@reports')->name('Reports');
 
+Route::get('/users_log', 'UsersLogController@index')->name('users_log');
 
-		Route::get('/users_log', 'UsersLogController@index')->name('users_log');
+Route::get('/borrowed/store/{id}', 'BorrowsController@dataToStore')->name('Borrows.store');
+Route::post('/borrowed/stored/{id}', 'BorrowsController@store')->name('Borrows.stored');

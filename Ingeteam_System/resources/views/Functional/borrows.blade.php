@@ -8,8 +8,7 @@
                 <center>
               	    <h1> Borrowed List </h1>
                 	 @if (Auth::user()->role==='admin')
-                        <a class="addUser" href="{{ route('Equipments.add') }}"> <button>Update </button></a>
-                    	<table>
+                        <table>
                     		<tr class="tableName">
                                 <td>NAME</td>
                                 <td>EMAIL</td>
@@ -17,7 +16,21 @@
     	                		<td>CONDITION</td>
                                 <td>Borrowed Time</td>
                                 <td>Returned Time</td>
+                                <td>Action</td>
     	                	</tr>
+                            @foreach($data as $value)
+
+                            <tr>
+                                <td>{{ $value -> name}}</td>
+                                <td>{{ $value -> email}}</td>
+                                <td>{{ $value -> parts }}</td>
+                                <td>{{ $value -> condition}}</td>
+                                <td>{{ $value -> created_at}}</td>
+                                <td>{{ $value -> updated_at}}</td>
+                                <td><a href="{{ route('Borrowed.edit',[$value->id])}}"> <button>Update</button></a>
+                                </td>
+                            </tr>
+                            @endforeach
 
                     	</table>
                     @else

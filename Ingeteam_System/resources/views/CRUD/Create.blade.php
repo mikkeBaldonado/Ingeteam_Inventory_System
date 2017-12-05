@@ -54,10 +54,12 @@
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                         <label for="role" class="col-md-4 control-label">Role</label>
-
+                                        
                                         <div class="col-md-6">
-                                            <input id="role" type="role" class="form-control" name="role" value="{{ old('role') }}" required>
-
+                                            <select id="role" type="role" class="form-control" name="role" required>
+                                                <option value="Employee">Employee</option>
+                                                <option value="Admin">Admin</option>
+                                            </select>
                                             @if ($errors->has('role'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('role') }}</strong>

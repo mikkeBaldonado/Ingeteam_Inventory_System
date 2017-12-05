@@ -265,7 +265,7 @@
                     <a class="adminside" href="{{ url('/Reports') }}">
                                 Reports
                     </a>
-                    <a class="adminside" href="{{ url('/Reports') }}">
+                    <a class="adminside" href="{{ url('/archive_users') }}">
                                 Archive
                     </a>
                     

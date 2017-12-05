@@ -20,7 +20,9 @@ class CreateEquipmentsTable extends Migration
             $table->string('units');
             $table->string('hs_code')->unique();
             $table->string('condition');
-            $table->timestamps();
+            $table->string('users_id');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
 
         });
     }

@@ -40,7 +40,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <center>
-                         <h1> Equipments List </h1>
+                        <h1> Equipments List </h1>
                         <table>
                             <tr class="tableName">
                                 <td>SAP</td>
@@ -60,7 +60,7 @@
                                 <td>{{ $value -> hs_code}}</td>
                                 <td>{{ $value -> condition}}</td>
                                  <td><a href="{{ route('Equipments.edit',[$value->id])}}"> <button>Update</button></a>&nbsp;
-                                    <a href=""> <button>Borrow</button></a>
+                                    <a href="{{ route('Borrows.store',[$value->id]) }}"> <button>Borrow</button></a>
                                 </td>
                             </tr>
                             @endforeach

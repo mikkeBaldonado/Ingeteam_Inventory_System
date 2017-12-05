@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use App\User;
+use App\Archive_users;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
 class RegisterController extends Controller
 {
     /*
@@ -30,6 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
+    
     public function addUser(){
         if(Auth::User()->role === "admin"){
                 return view('CRUD.Create');    
@@ -45,11 +47,20 @@ class RegisterController extends Controller
         return $this->registered($request, $user)?:redirect('users_record');
     }
     
-    public function destroy($id){
-         $task = User::findOrFail($id);
+    public function destroy($id, Request $request){
+        $task = User::findOrFail($id);
+
+        $archive = new Archive_users;
+        
+        $archive->id = $task['id'];
+        $archive->name = $task['name'];
+        $archive->username = $task['username'];
+        $archive->email = $task['email'];
+        $archive->role = $task['role'];
+        $archive -> save();
 
         $task->delete();
-
+        
         return redirect()->route('users_record');
     }
 
