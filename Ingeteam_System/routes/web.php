@@ -49,6 +49,8 @@ Route::get('/users_record', 'UsersRecordController@getData')->name('users_record
 
 Route::get('/users_log', 'UsersLogController@index')->name('users_log');
 
+Route::get('/borrowed', 'BorrowsController@index')->name('borrows');
+
 Route::get('/Equipments', 'EquipmentsController@getData')->name('Equipments');
 
-Route::get('/Reports', 'ReportsController@index')->name('Reports');
+Route::get('/Reports', 'EquipmentsController@reports')->name('Reports');

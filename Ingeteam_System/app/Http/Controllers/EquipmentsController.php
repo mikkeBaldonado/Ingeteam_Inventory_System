@@ -85,6 +85,21 @@ class EquipmentsController extends Controller
 
         return redirect()->route('Equipments');
     }
+
+    public function reports(){
+        $data['data'] = DB::table('equipments') -> get();
+
+        if(count($data) > 0)
+        {
+            return view('Functional.Reports', $data);
+        }
+        else
+        {
+            $equipment = Auth::Equipments();
+            return view('Functional.Reports')->with(['equipment' => $equipment]);
+        }
+        
+    }
     /**
      * Create a new controller instance.
      *
