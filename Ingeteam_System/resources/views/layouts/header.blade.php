@@ -61,6 +61,7 @@
                 padding: 10px;
                 border-collapse: collapse;
                 width: 100%;
+                margin-bottom: 20px;
             }
             .tableName{
                 text-align: center;

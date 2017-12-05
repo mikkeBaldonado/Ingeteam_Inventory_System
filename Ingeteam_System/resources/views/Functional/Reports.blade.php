@@ -8,7 +8,7 @@
                 <div class="panel panel-default" id="admin_panel" style="background-color: white">
                     <center><h1> Reports </h1> </center>
                     <div class="tab">
-    					<button class="tablinks" onclick="openCity(event, 'Good')">Good</button>
+    					<button class="tablinks" onclick="openCity(event, 'Good')" id="defaultOpen">Good</button>
     					<button class="tablinks" onclick="openCity(event, 'Defective')">Defective</button>
     					<button class="tablinks" onclick="openCity(event, 'ToBeReplace')">To be Replace</button>
     				</div>
@@ -91,7 +91,7 @@
                 <div class="panel panel-default">
                     <center><h1> Reports </h1> </center>
                     <div class="tab">
-                        <button class="tablinks" onclick="openCity(event, 'Good')">Good</button>
+                        <button class="tablinks" onclick="openCity(event, 'Good')" id="defaultOpen">Good</button>
                         <button class="tablinks" onclick="openCity(event, 'Defective')">Defective</button>
                         <button class="tablinks" onclick="openCity(event, 'ToBeReplace')">To be Replace</button>
                     </div>
@@ -186,5 +186,6 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+document.getElementById("defaultOpen").click();
 </script>
 @endsection

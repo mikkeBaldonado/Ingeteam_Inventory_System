@@ -8,7 +8,7 @@
                 <center style="background-color: white">
                     <center><h1> Archive List </h1> </center>
                     <div class="tab">
-                        <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
+                        <button class="tablinks" onclick="openCity(event, 'Users')" id="defaultOpen">Users</button>
                         <button class="tablinks" onclick="openCity(event, 'Equipments')">Equipments</button>
                     </div>
                     <div id="Users" class="tabcontent">
@@ -74,5 +74,6 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+document.getElementById("defaultOpen").click();
 </script>
 @endsection

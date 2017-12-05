@@ -87,7 +87,6 @@ class EquipmentsController extends Controller
             $this->validate($request, [
                 'sap' => 'required|string|max:255',
                 'parts'  => 'required',
-                'units' => 'required',
                 'hs_code' => 'required|string|min:4',
                 'condition' => 'required|string|min:4',
                 'users_id' => 'required',
@@ -95,7 +94,6 @@ class EquipmentsController extends Controller
             $task->update([
                 'sap' => $request['sap'],
                 'parts' => $request['parts'],
-                'units' => $request['units'],
                 'hs_code' => $request['hs_code'],
                 'condition' => $request['condition'],
                 'users_id' => $request['users_id'],

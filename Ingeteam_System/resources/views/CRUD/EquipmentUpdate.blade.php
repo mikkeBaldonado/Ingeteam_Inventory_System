@@ -22,7 +22,7 @@
                                 <label for="sap" class="col-md-4 control-label">SAP</label>
 
                                 <div class="col-md-6">
-                                    <input id="sap" type="text" class="form-control" name="sap" value="{{ $task['sap'] }}" required autofocus>
+                                    <input id="sap" type="text" class="form-control" name="sap" value="{{ $task['sap'] }}" readonly autofocus>
 
                                     @if ($errors->has('sap'))
                                         <span class="help-block">
@@ -45,25 +45,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('units') ? ' has-error' : '' }}">
-                                <label for="units" class="col-md-4 control-label">Units:</label>
-
-                                <div class="col-md-6">
-                                    <input id="units" type="units" class="form-control" name="units" value="{{ $task['units'] }}" required>
-
-                                    @if ($errors->has('units'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('units') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group{{ $errors->has('hs_code') ? ' has-error' : '' }}">
                                 <label for="hs_code" class="col-md-4 control-label">HS Code</label>
 
                                 <div class="col-md-6">
-                                    <input id="hs_code" type="hs_code" class="form-control" name="hs_code" value="{{ $task['hs_code'] }}" required>
+                                    <input id="hs_code" type="hs_code" class="form-control" name="hs_code" value="{{ $task['hs_code'] }}" readonly>
 
                                     @if ($errors->has('hs_code'))
                                         <span class="help-block">

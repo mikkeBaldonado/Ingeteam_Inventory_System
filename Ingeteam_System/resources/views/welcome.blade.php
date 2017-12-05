@@ -203,8 +203,8 @@
                                         <input id="password" type="password" class="form-control" name="password" required>
 
                                         @if ($errors->has('password'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('password') }}</strong>
+                                            <span class="pop-up">
+                                                Invalid Username and Password!
                                             </span>
                                         @endif
                                     </div>
