@@ -28,10 +28,23 @@
             }
             #login_header{
                 width: 710px;
-                margin-top: -7px;
+                margin-top: -8px;
+                float: right;
+            }
+            input{
+                font-weight: 500;
+            }
+            #login_header input{
+                color: black;
+                height: 30px;
             }
             .form-group{
                 margin-right: -12px;
+
+            }
+            .has-error{
+                margin-top: 1px;
+
             }
             .form-group label{
                 margin-right: -20px;
@@ -40,6 +53,14 @@
             .btn-primary{
                 width: 80px;
                 margin-right: -80px;
+                margin-left: -11px;
+                font-weight: bold;
+                background-color: gray;
+                border-color: gray;
+            }
+            .btn-primary:hover{
+                background-color: white;
+                color: gray;
             }
             .full-height {
                 height: 100vh;
@@ -59,6 +80,7 @@
                 position: absolute;
                 right: 10px;
                 top: 18px;
+                width: 100%;
             }
 
             .content {
@@ -78,16 +100,25 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
+            .btn-link{
+                margin-right: 168px;
+                margin-top: -7px;
+                float: right;
+                color: white;
+                display: table-footer-group;
+            }
+            .btn-link:hover{
+                color: black;
+            }
 
             .m-b-md {
                 margin-bottom: 30px;
             }
-            .form-inline{
-                padding: 5px;
-            }
             .panel{
                 float: right;
                 width: 500px;
+                height: 550px;
+                margin-top: -60px;
             }
             .container{
                 margin-right: 0px;
@@ -95,6 +126,38 @@
             .row{
                 margin-left: 600px;
             }
+            .ingeteam{
+                margin-left: -120px;
+                margin-top: 80px;
+            }
+            .system{
+                float: left;
+                margin-left: -505px;
+                margin-top: 133px;
+            }
+            .system span{
+                margin-left: 20px;
+            }
+            .headerLogo{
+                float: left;
+                margin-top: -33px;
+                margin-left: 32px;
+            }
+            .whiteLogo{
+                width: 220px;
+                height: 80px;
+            }
+            .pop-up{
+                text-align: center;
+                width: 250px;
+                background-color: white;
+                border: 1px solid red;
+                font-weight: bold;
+                color: red;
+                position: absolute;
+                z-index: 1;
+            }
+            
         </style>
     </head>
 
@@ -105,6 +168,11 @@
                     @if (Auth::check())
                         <a href="{{ url('/home') }}">Home</a>
                     @else
+                    <div class="headerLogo">
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            <img src="{{ asset('images/whiteLogo.png') }}" class="whiteLogo">
+                        </a>
+                    </div>
                         <div id="login_header">
                             <form class="form-inline" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
@@ -116,8 +184,8 @@
                                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                                         @if ($errors->has('email'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('email') }}</strong>
+                                            <span class="pop-up">
+                                                Invalid Username and Password!
                                             </span>
                                         @endif
                                     </div>
@@ -140,10 +208,13 @@
                                 <div class="form-group">
                                     <div class="col-md-8 col-md-offset-4">
                                         <button type="submit" class="btn btn-primary">
-                                            Login
+                                            LOG IN
                                         </button>
                                     </div>
                                 </div>
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    Forgot Your Password?
+                                </a>
                             </form>
                         </div>
                     @endif
@@ -151,12 +222,18 @@
             @endif
         </header>
         <div class="container">
+            <div class="ingeteam">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                   <img src="{{ asset('images/welcomeLogo.png') }}" class="logo">
+                </a>
+                <h1 class="system"> I N V E N T O R Y <span>  S Y S T E M </span></h1>
+            </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <center>
                             <div class="panel-heading">
-                                <h1>Sign-up</h1></div>
+                                <h1 class="sign">Sign-up</h1></div>
                         </center>
 
 

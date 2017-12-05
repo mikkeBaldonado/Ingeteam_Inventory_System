@@ -8,10 +8,51 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Ingeteam Philippines Inc.</title>
  
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+     <style>
+            .container{
+                margin-top: 8px;
+            }
+            .navbar{
+                width: 100%;
+                height: 70px;
+                color: white;
+                background-color: gray;
+                color: white;
+            }
+            .navbar-default .navbar-brand{
+                color: white;
+                font-size: large;
+            }
+            .dropdown{
+                margin-right: -70px;
+            }
+            .navbar-default .navbar-nav>li>a{
+                color: white;
+                font-size: large;
+            }
+            .functions{
+                height: 280px;
+                width: 260px;
+                margin-right: 25px;
+                margin-left: 60px;
+                margin-top: 20px;
+            }
+            .panel{
+                margin-top: -24px;
+                margin-bottom: 0px;
+                height: 630px;
+            }
+            .logo{
+                width: 220px;
+                height: 80px;
+                margin-top: -22px;
+                margin-left: -65px;
+            }
+        </style>
 </head>
 <body>
     <div id="app">
@@ -28,8 +69,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                        <img src="{{ asset('images/whiteLogo.png') }}" class="logo">
                     </a>
                 </div>
 
