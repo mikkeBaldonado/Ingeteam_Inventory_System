@@ -7,11 +7,12 @@
             <div class="panel panel-default" id="admin_panel">
                 <center>
               	    <h1> Borrowed List </h1>
-                	 @if (Auth::user()->role==='admin')
+                	 @if (Auth::user()->role==='Admin')
                         <table>
                     		<tr class="tableName">
                                 <td>NAME</td>
                                 <td>EMAIL</td>
+                                <td>Equipments ID</td>
     	                		<td>PARTS</td>
     	                		<td>CONDITION</td>
                                 <td>Borrowed Time</td>
@@ -19,31 +20,35 @@
                                 <td>Action</td>
     	                	</tr>
                             @foreach($data as $value)
-
-                            <tr>
-                                <td>{{ $value -> name}}</td>
-                                <td>{{ $value -> email}}</td>
-                                <td>{{ $value -> parts }}</td>
-                                <td>{{ $value -> condition}}</td>
-                                <td>{{ $value -> created_at}}</td>
-                                <td>{{ $value -> updated_at}}</td>
-                                <td><a href="{{ route('Borrowed.edit',[$value->id])}}"> <button>Update</button></a>
-                                </td>
-                            </tr>
+                                @if($value->updated_at == NULL)
+                                    <tr>
+                                        <td>{{ $value -> name}}</td>
+                                        <td>{{ $value -> email}}</td>
+                                        <td>{{ $value -> equipments_id }}</td>
+                                        <td>{{ $value -> parts }}</td>
+                                        <td>{{ $value -> condition}}</td>
+                                        <td>{{ $value -> created_at}}</td>
+                                        <td>{{ $value -> updated_at}}</td>
+                                        <td><a href="{{ route('Borrowed.edit',[$value->id])}}"> <button>Update</button></a>
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>{{ $value -> name}}</td>
+                                        <td>{{ $value -> email}}</td>
+                                        <td>{{ $value -> equipments_id }}</td>
+                                        <td>{{ $value -> parts }}</td>
+                                        <td>{{ $value -> condition}}</td>
+                                        <td>{{ $value -> created_at}}</td>
+                                        <td>{{ $value -> updated_at}}</td>
+                                        <td> Returned </td>
+                                    </tr>
+                                @endif
                             @endforeach
 
                     	</table>
                     @else
-                    	<table>
-                    		<tr class="tableName">
-    	                		<td>SAP</td>
-    	                		<td>PARTS</td>
-    	                		<td>UNITS</td>
-    	                		<td>HS CODE</td>
-                                <td>CONDITION</td>
-    	                		<td> Action </td>
-    	                	</tr>
-                    	</table>
+                    	
                     @endif
                 </center>
             </div>

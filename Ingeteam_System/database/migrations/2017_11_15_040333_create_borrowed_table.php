@@ -20,7 +20,8 @@ class CreateBorrowedTable extends Migration
             $table->string('equipments_id');
             $table->string('parts');
             $table->string('condition');
-            $table->timestampsTz();
+            $table->timestampTz('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestampTz('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

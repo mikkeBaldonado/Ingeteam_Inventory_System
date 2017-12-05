@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel="shortcut icon" type="image/png" href="{{ asset('images/welcomeLogo.png') }}">
         <title>Ingeteam Philippines Inc.</title>
 
         <!-- Fonts -->
@@ -35,11 +36,12 @@
                 margin-right: 20px;
             }
             .functions{
-                height: 280px;
-                width: 260px;
-                margin-right: 25px;
-                margin-left: 60px;
-                margin-top: 20px;
+
+                height: 240px;
+                width: 230px;
+                margin-right: 20px;
+                margin-left: 40px;
+                margin-top: 150px;
             }
             .panel{
                 margin-left: -70px;
@@ -55,6 +57,7 @@
                 margin-left: -65px;
             }
             table{
+                background-color: white;
                 padding: 10px;
                 border-collapse: collapse;
                 width: 100%;
@@ -170,9 +173,15 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
-                        <img src="{{ asset('images/whiteLogo.png') }}" class="logo">
-                    </a>
+                    @if(Auth::user()->role == 'Admin')
+                        <a class="navbar-brand" href="{{ url('/administration/admin') }}">
+                            <img src="{{ asset('images/whiteLogo.png') }}" class="logo">
+                        </a>
+                    @else
+                        <a class="navbar-brand" href="{{ url('/home') }}">
+                            <img src="{{ asset('images/whiteLogo.png') }}" class="logo">
+                        </a>
+                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -182,7 +191,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    @if (Auth::user()->role==='admin')
+                    @if (Auth::user()->role==='Admin')
                         <ul class="nav navbar-nav navbar-right">
                             
                             <li class="dropdown">
@@ -247,7 +256,7 @@
                 </div>
             </div>
         </nav>
-        @if (Auth::user()->role==='admin')
+        @if (Auth::user()->role==='Admin')
         <div id="admin_nav">
                 <aside>
                     <a class="adminside" href="{{ url('/users_record') }}">

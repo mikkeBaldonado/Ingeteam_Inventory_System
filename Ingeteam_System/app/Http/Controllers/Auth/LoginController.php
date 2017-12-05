@@ -31,7 +31,7 @@ class LoginController extends Controller
         ]))
         {
             $user = User::where('email', $request->email) -> first();
-            if($user->role === "admin"){
+            if($user->role === "Admin"){
                 return redirect() -> route('admin');    
             }
             return redirect() -> route('home');

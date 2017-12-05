@@ -32,7 +32,7 @@ class EquipmentsController extends Controller
      */
 
     public function addEquipment(){
-        if(Auth::User()->role === "admin"){
+        if(Auth::User()->role === "Admin"){
                 return view('CRUD.EquipmentCreate');    
             }
        return redirect() -> route('Functional.Equipments');
@@ -44,7 +44,9 @@ class EquipmentsController extends Controller
 
         if(count($data) > 0)
         {
-            return view('Functional.Equipments', $data);
+            return view('Functional.Equipments')
+                ->with('data', DB::table('equipments') -> get())
+                ->with('borrow', DB::table('borrowed') -> get()); 
         }
         else
         {
@@ -121,6 +123,15 @@ class EquipmentsController extends Controller
         }
         
     }
+
+    public function checker(){
+        $data['data'] = DB::table('equipments') -> get();
+
+        if(count($data) > 0)
+        {
+            return $data;
+        }
+    }
     /**
      * Create a new controller instance.
      *
@@ -128,22 +139,56 @@ class EquipmentsController extends Controller
      */
     public function __construct()
     {
-        //return view('CRUD.Create');
-        return redirect() -> route('admin'); 
+        $this->middleware('auth'); 
     }
 
     public function store(Request $request){
+        
         $this->validate($request, [
             'sap' => 'required|string|max:255',
-            'parts'  => 'required|string|max:255|unique:equipments',
-            'units' => 'required|string|max:255|unique:equipments',
+            'parts'  => 'required|string|max:255',
+            'units' => 'required|string|max:255',
             'hs_code' => 'required|string|min:4',
             'condition' => 'required|string|min:4',
         ]);
+        /*$equipment = Equipments::findOrFail($request['parts']);
+        
+        $request['sap'] = $equipment['sap'];
+        $request['hs_code'] = $equipment['hs_code'];
+        */
+/*
+        $data = $this->checker();
+        $task = Equipments::findOrFail($request['parts']);
 
-        $input = $request->all();
+        foreach ($data->parts as $value) {
+            if($value === $request['parts']){
+                $request['sap'] = $task['sap'];
+                $request['parts'] = $task['parts'];
+                $request['hs_code'] = $task['hs_code'];
+            }
+        }
+*/
+        $unit = $request['units'];
+        if($request['units'] > 1){
+            while($request['units'] != 0){
+                $temp = 1;
+                $request['units'] = $temp;
+                Equipments::create([
+                    'sap' => $request['sap'],
+                    'parts' => $request['parts'],
+                    'units' => $request['units'],
+                    'hs_code' => $request['hs_code'],
+                    'condition' => $request['condition'],
+                ]);
+                $request['units'] = $unit;
+                $request['units'] = $request['units'] - 1;
+                $unit = $request['units'];
+            }
+        }else{
+            $input = $request->all();    
+            Equipments::create($input);
+        }
 
-        Equipments::create($input);
 
         return redirect()->route('Equipments');
     }

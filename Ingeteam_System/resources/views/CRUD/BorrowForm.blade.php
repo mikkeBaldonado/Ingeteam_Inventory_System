@@ -5,7 +5,14 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Borrowing Form</div>
+                <div class="panel-heading">
+                    <a href="{{ url('/Equipments') }}" >
+                        <button type="submit" class="btn btn-primary" style="background-color: gray">
+                            BACK
+                        </button>
+                    </a>
+                    <center>Borrowing Form</center>
+                </div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('Borrows.stored',$id) }}">
@@ -67,25 +74,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('units') ? ' has-error' : '' }}">
-                            <label for="units" class="col-md-4 control-label">Units: </label>
-
-                            <div class="col-md-6">
-                                <input id="units" type="text" class="form-control" name="units" value="{{ $task['units'] }}" required autofocus>
-
-                                @if ($errors->has('units'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('units') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('condition') ? ' has-error' : '' }}">
                             <label for="condition" class="col-md-4 control-label">Condition</label>
 
                             <div class="col-md-6">
-                                <select id="condition" type="condition" class="form-control" name="condition" required>
+                                <select id="condition" type="condition" class="form-control" name="condition" readonly>
                                     <option value="{{ $task['condition'] }}">{{ $task['condition'] }}</option>
                                 </select>
                                 @if ($errors->has('condition'))
@@ -98,7 +91,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button onclick="return myFunction();" type="submit" class="btn btn-primary">
                                     Confirm Borrow
                                 </button>
                             </div>
@@ -109,4 +102,11 @@
         </div>
     </div>
 </div>
+
+<script>
+  function myFunction() {
+      if(!confirm("Are You Sure to Borrow this Equipments?"))
+      event.preventDefault();
+  }
+ </script>
 @endsection

@@ -5,7 +5,14 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Equipments Update</div>
+                <div class="panel-heading">
+                    <a href="{{ url('/borrowed') }}" >
+                        <button type="submit" class="btn btn-primary" style="background-color: gray">
+                            Cancel
+                        </button>
+                    </a>
+                    <center>Equipments Update</center>
+                </div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('Borrowed.update',$id)  }}">
@@ -44,9 +51,10 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button onclick="return myFunction();" type="submit" class="btn btn-primary">
                                     Submit
                                 </button>
+                                
                             </div>
                         </div>
                     </form>
@@ -55,4 +63,11 @@
         </div>
     </div>
 </div>
+
+<script>
+  function myFunction() {
+      if(!confirm("Are You Sure to save this changes?"))
+      event.preventDefault();
+  }
+ </script>
 @endsection

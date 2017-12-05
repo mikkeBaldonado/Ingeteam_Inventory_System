@@ -5,7 +5,14 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                    <div class="panel-heading">Add Users</div>
+                    <div class="panel-heading">
+                        <a href="{{ url('/users_record') }}" >
+                            <button type="submit" class="btn btn-primary" style="background-color: gray">
+                                BACK
+                            </button>
+                        </a>
+                        <center> Add Users </center>
+                    </div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('register') }}">
@@ -53,20 +60,20 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <label for="role" class="col-md-4 control-label">Role</label>
+                                <label for="role" class="col-md-4 control-label">Role</label>
                                         
-                                        <div class="col-md-6">
-                                            <select id="role" type="role" class="form-control" name="role" required>
-                                                <option value="Employee">Employee</option>
-                                                <option value="Admin">Admin</option>
-                                            </select>
-                                            @if ($errors->has('role'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('role') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
+                                <div class="col-md-6">
+                                    <select id="role" type="role" class="form-control" name="role" required>
+                                        <option value="Employee">Employee</option>
+                                        <option value="Admin">Admin</option>
+                                    </select>
+                                    @if ($errors->has('role'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('role') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="col-md-4 control-label">Password</label>
@@ -92,9 +99,10 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <a href="{{ url('/users_record') }}"><button type="submit" class="btn btn-primary">
+                                    <a onclick="return myFunction();" href="{{ url('/users_record') }}"><button type="submit" class="btn btn-primary">
                                         Submit
                                     </button></a>
+
                                 </div>
                             </div>
                         </form>
@@ -104,4 +112,11 @@
         </div>
     </div>
 </div>
+
+<script>
+  function myFunction() {
+      if(!confirm("Are You Sure to add this User/s?"))
+      event.preventDefault();
+  }
+ </script>
 @endsection

@@ -32,22 +32,28 @@ class BorrowsController extends Controller
      */
     public function index()
     {
-        return view('Functional.borrows');
+        if(Auth::user()->role == 'Admin'){
+            return view('Functional.borrows');
+        }
+        return back();
     }
 
     public function getData()
     {
-        $data['data'] = DB::table('borrowed') -> get();
+        if(Auth::user()->role == 'Admin'){
+            $data['data'] = DB::table('borrowed') -> get();
 
-        if(count($data) > 0)
-        {
-            return view('Functional.borrows', $data);
+            if(count($data) > 0)
+            {
+                return view('Functional.borrows', $data);
+            }
+            else
+            {
+                $equipment = Auth::Equipments();
+                return view('Functional.borrows')->with(['borrowed' => $borrowed]);
+            }
         }
-        else
-        {
-            $equipment = Auth::Equipments();
-            return view('Functional.borrows')->with(['borrowed' => $borrowed]);
-        }
+        return back();
     }
 
     /*protected function store($id, $user, Request $request)
@@ -90,7 +96,7 @@ class BorrowsController extends Controller
         $borrow = borrowed::findOrFail($id);
         $task = Equipments::findOrFail($borrow->equipments_id);
 
-        if(Auth::User()->role === "admin"){
+        if(Auth::User()->role === "Admin"){
             $this->validate($request, [
                 'parts'  => 'required',
                 'condition' => 'required|string|min:4',

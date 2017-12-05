@@ -5,7 +5,15 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Equipments</div>
+                <div class="panel-heading">
+                    <a href="{{ url('/Equipments') }}" >
+                        <button type="submit" class="btn btn-primary" style="background-color: gray">
+                            BACK
+                        </button>
+                    </a>
+                    <center>Equipments</center>
+                </div>
+
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('Equipments.create') }}">
@@ -15,7 +23,7 @@
                             <label for="sap" class="col-md-4 control-label">SAP</label>
 
                             <div class="col-md-6">
-                                <input id="sap" type="text" class="form-control" name="sap" value="{{ old('sap') }}" required autofocus>
+                                <input id="sap" type="text" class="form-control" name="sap" value="{{ old('sap') }}" required autofocus autocomplete="on">
 
                                 @if ($errors->has('sap'))
                                     <span class="help-block">
@@ -85,9 +93,10 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button  onclick="return myFunction();" type="submit" class="btn btn-primary">
                                     Submit
                                 </button>
+
                             </div>
                         </div>
                     </form>
@@ -96,4 +105,10 @@
         </div>
     </div>
 </div>
+<script>
+  function myFunction() {
+      if(!confirm("Are You Sure to add this Equipment/s?"))
+      event.preventDefault();
+  }
+ </script>
 @endsection

@@ -5,10 +5,8 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2" id="admin_field">
             <div class="panel panel-default" id="admin_panel">
-                <center>
-                    <div class="col-md-8 col-md-offset-2" id="admin_field">
-                <div class="panel panel-default" id="admin_panel">
-                    <center><h1> Reports </h1> </center>
+                <center style="background-color: white">
+                    <center><h1> Archive List </h1> </center>
                     <div class="tab">
                         <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
                         <button class="tablinks" onclick="openCity(event, 'Equipments')">Equipments</button>
@@ -57,7 +55,7 @@
                             @endforeach
                         </table>
                     </div>
-                </div>
+                
             </div>
         </div>
     </div>

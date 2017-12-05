@@ -33,7 +33,7 @@ class RegisterController extends Controller
      */
     
     public function addUser(){
-        if(Auth::User()->role === "admin"){
+        if(Auth::User()->role === "Admin"){
                 return view('CRUD.Create');    
             }
        return redirect() -> route('home');
@@ -75,19 +75,37 @@ class RegisterController extends Controller
     {
         $task = User::findOrFail($id);
 
-        $this->validate($request, [
-            'name' => 'required|string|min:6',
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        if(Auth::User()->role == 'Admin'){
+            $this->validate($request, [
+                'name' => 'required|string|min:6',
+                'username' => 'required',
+                'email' => 'required',
+                'role' => 'required',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
 
-        $task->update([
-            'name' => $request['name'],
-            'username' => $request['username'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
-        ]);
+            $task->update([
+                'name' => $request['name'],
+                'username' => $request['username'],
+                'email' => $request['email'],
+                'role' => $request['role'],
+                'password' => bcrypt($request['password']),
+            ]);
+        }else{
+            $this->validate($request, [
+                'name' => 'required|string|min:6',
+                'username' => 'required',
+                'email' => 'required',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
+
+            $task->update([
+                'name' => $request['name'],
+                'username' => $request['username'],
+                'email' => $request['email'],
+                'password' => bcrypt($request['password']),
+            ]);
+        }
 
         return redirect()->route('users_record');
     }

@@ -8,6 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/welcomeLogo.png') }}">
     <title>Ingeteam Philippines Inc.</title>
  
     <!-- Styles -->
@@ -69,9 +70,11 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
-                        <img src="{{ asset('images/whiteLogo.png') }}" class="logo">
-                    </a>
+                    
+                        <a class="navbar-brand" href="{{ url('/home') }}">
+                            <img src="{{ asset('images/whiteLogo.png') }}" class="logo">
+                        </a>
+                    
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

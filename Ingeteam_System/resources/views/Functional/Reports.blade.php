@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        @if (Auth::user()->role==='admin')
+        @if (Auth::user()->role==='Admin')
             <div class="col-md-8 col-md-offset-2" id="admin_field">
-                <div class="panel panel-default" id="admin_panel">
+                <div class="panel panel-default" id="admin_panel" style="background-color: white">
                     <center><h1> Reports </h1> </center>
                     <div class="tab">
     					<button class="tablinks" onclick="openCity(event, 'Good')">Good</button>
@@ -15,21 +15,21 @@
     				<div id="Good" class="tabcontent">
     					<table>
                         	<tr class="tableName">
-        	                	<td>SAP</td>
-        	                	<td>PARTS</td>
-        	                	<td>UNITS</td>
-        	                	<td>HS CODE</td>
+        	                	<td>ID</td>
+                                <td>SAP</td>
+                                <td>PARTS</td>
+                                <td>HS CODE</td>
                                 <td>CONDITION</td>
     						</tr>
                                 @foreach($data as $value)
 
                         		<tr>
                         			@if ($value -> condition === "Good")
-    	                    			<td>{{ $value -> sap}}</td>
-    	    	                		<td>{{ $value -> parts}}</td>
-    	    	                		<td>{{ $value -> units }}</td>
-    	    	                		<td>{{ $value -> hs_code}}</td>
-    	    	                		<td>{{ $value -> condition}}</td>
+    	                    			<td>{{ $value -> id}}</td>
+                                        <td>{{ $value -> sap}}</td>
+                                        <td>{{ $value -> parts}}</td>
+                                        <td>{{ $value -> hs_code}}</td>
+                                        <td>{{ $value -> condition}}</td>
     	    	                	@endif
                         		</tr>
                         		@endforeach
@@ -39,21 +39,21 @@
     				<div id="Defective" class="tabcontent">
     					<table>
                         	<tr class="tableName">
-        	                	<td>SAP</td>
-        	                	<td>PARTS</td>
-        	                	<td>UNITS</td>
-        	                	<td>HS CODE</td>
+        	                	<td>ID</td>
+                                <td>SAP</td>
+                                <td>PARTS</td>
+                                <td>HS CODE</td>
                                 <td>CONDITION</td>
         	                </tr>
         	                @foreach($data as $value)
 
                         		<tr>
                         			@if ($value -> condition === "Defective")
-    	                    			<td>{{ $value -> sap}}</td>
-    	    	                		<td>{{ $value -> parts}}</td>
-    	    	                		<td>{{ $value -> units }}</td>
-    	    	                		<td>{{ $value -> hs_code}}</td>
-    	    	                		<td>{{ $value -> condition}}</td>
+    	                    			<td>{{ $value -> id}}</td>
+                                        <td>{{ $value -> sap}}</td>
+                                        <td>{{ $value -> parts}}</td>
+                                        <td>{{ $value -> hs_code}}</td>
+                                        <td>{{ $value -> condition}}</td>
     	    	                	@endif
                         		</tr>
                         	@endforeach
@@ -63,21 +63,21 @@
     				<div id="ToBeReplace" class="tabcontent">
     					<table>
                         	<tr class="tableName">
-        	                	<td>SAP</td>
-        	                	<td>PARTS</td>
-        	                	<td>UNITS</td>
-        	                	<td>HS CODE</td>
+        	                	<td>ID</td>
+                                <td>SAP</td>
+                                <td>PARTS</td>
+                                <td>HS CODE</td>
                                 <td>CONDITION</td>
         	                </tr>
         	                @foreach($data as $value)
 
                         		<tr>
                         			@if ($value -> condition === "To be Replaced")
-    	                    			<td>{{ $value -> sap}}</td>
-    	    	                		<td>{{ $value -> parts}}</td>
-    	    	                		<td>{{ $value -> units }}</td>
-    	    	                		<td>{{ $value -> hs_code}}</td>
-    	    	                		<td>{{ $value -> condition}}</td>
+    	                    			<td>{{ $value -> id}}</td>
+                                        <td>{{ $value -> sap}}</td>
+                                        <td>{{ $value -> parts}}</td>
+                                        <td>{{ $value -> hs_code}}</td>
+                                        <td>{{ $value -> condition}}</td>
     	    	                	@endif
                         		</tr>
                         	@endforeach
@@ -98,9 +98,9 @@
                     <div id="Good" class="tabcontent">
                         <table>
                             <tr class="tableName">
+                                <td>ID</td>
                                 <td>SAP</td>
                                 <td>PARTS</td>
-                                <td>UNITS</td>
                                 <td>HS CODE</td>
                                 <td>CONDITION</td>
                             </tr>
@@ -108,9 +108,9 @@
 
                                 <tr>
                                     @if ($value -> condition === "Good")
+                                        <td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>
                                         <td>{{ $value -> parts}}</td>
-                                        <td>{{ $value -> units }}</td>
                                         <td>{{ $value -> hs_code}}</td>
                                         <td>{{ $value -> condition}}</td>
                                     @endif
@@ -122,9 +122,9 @@
                     <div id="Defective" class="tabcontent">
                         <table>
                             <tr class="tableName">
+                                <td>ID</td>
                                 <td>SAP</td>
                                 <td>PARTS</td>
-                                <td>UNITS</td>
                                 <td>HS CODE</td>
                                 <td>CONDITION</td>
                             </tr>
@@ -132,9 +132,9 @@
 
                                 <tr>
                                     @if ($value -> condition === "Defective")
+                                        <td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>
                                         <td>{{ $value -> parts}}</td>
-                                        <td>{{ $value -> units }}</td>
                                         <td>{{ $value -> hs_code}}</td>
                                         <td>{{ $value -> condition}}</td>
                                     @endif
@@ -146,9 +146,9 @@
                     <div id="ToBeReplace" class="tabcontent">
                         <table>
                             <tr class="tableName">
+                                <td>ID</td>
                                 <td>SAP</td>
                                 <td>PARTS</td>
-                                <td>UNITS</td>
                                 <td>HS CODE</td>
                                 <td>CONDITION</td>
                             </tr>
@@ -156,9 +156,9 @@
 
                                 <tr>
                                     @if ($value -> condition === "To be Replaced")
+                                        <td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>
                                         <td>{{ $value -> parts}}</td>
-                                        <td>{{ $value -> units }}</td>
                                         <td>{{ $value -> hs_code}}</td>
                                         <td>{{ $value -> condition}}</td>
                                     @endif

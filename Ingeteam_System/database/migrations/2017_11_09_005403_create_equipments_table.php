@@ -14,11 +14,11 @@ class CreateEquipmentsTable extends Migration
     public function up()
     {
         Schema::create('equipments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('sap')->unique();
-            $table->string('parts')->unique();
+            $table->increments('id')->unique();
+            $table->string('sap');
+            $table->string('parts');
             $table->string('units');
-            $table->string('hs_code')->unique();
+            $table->string('hs_code');
             $table->string('condition');
             $table->string('users_id');
             $table->timestamp('created_at')->useCurrent();

@@ -48,7 +48,7 @@ class UsersLogController extends Controller
     }
     public function index()
     {
-        if(Auth::user()->role === 'admin'){
+        if(Auth::user()->role === 'Admin'){
             $data['data'] = DB::table('users_log') -> get();
 
             if(count($data) > 0)

@@ -11,4 +11,6 @@ class Equipments extends Model
     protected $fillable = [
         'sap', 'parts', 'units', 'hs_code', 'condition',
     ];
+
+    public $timestamps = false;
 }
