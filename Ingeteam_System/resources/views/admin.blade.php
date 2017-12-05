@@ -3,9 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <h1>Admin DashBoard</h1>
+        <div class="col-md-8 col-md-offset-2" id="admin_field">
+            <div class="panel panel-default" id="admin_panel">
+                <center>
+	                <h1>Admin DashBoard</h1>
+	            </center>
             </div>
         </div>
     </div>

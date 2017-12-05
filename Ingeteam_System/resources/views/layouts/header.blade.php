@@ -133,6 +133,26 @@
                 border: 1px solid #ccc;
                 border-top: none;
             }
+            #admin_nav{
+                float: left;
+            }
+            aside{
+                float: left;
+                color: white;
+                padding: 20px;
+            }
+            .adminside{
+                color: gray;
+                font-weight: 10px;
+                font-size: 20px;
+                display: block;
+            }
+            #admin_field{
+                margin-left: 50px;
+            }
+            #admin_panel{
+
+            }
         </style>
     </head>
 <body>
@@ -164,32 +184,7 @@
                     <!-- Right Side Of Navbar -->
                     @if (Auth::user()->role==='admin')
                         <ul class="nav navbar-nav navbar-right">
-                            <!-- Authentication Links -->
-                            <li class="headerNavigation">
-                                <a class="navbar-brand" href="{{ url('/users_record') }}">
-                                    Users Record
-                                </a>
-                            </li>
-                            <li class="headerNavigation">
-                                <a class="navbar-brand" href="{{ url('/users_log') }}">
-                                    Users Log
-                                </a>
-                            </li>
-                            <li class="headerNavigation">
-                                <a class="navbar-brand" href="{{ url('/borrowed') }}">
-                                    Equipment Borrowed
-                                </a>
-                            </li>
-                            <li class="headerNavigation">
-                                <a class="navbar-brand" href="{{ url('/Equipments') }}">
-                                    Equipment
-                                </a>
-                            </li>
-                            <li class="headerNavigation">
-                                <a class="navbar-brand" href="{{ url('/Reports') }}">
-                                    Reports
-                                </a>
-                            </li>
+                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -252,6 +247,31 @@
                 </div>
             </div>
         </nav>
+        @if (Auth::user()->role==='admin')
+        <div id="admin_nav">
+                <aside>
+                    <a class="adminside" href="{{ url('/users_record') }}">
+                            Users Record
+                    </a>
+                    <a class="adminside" href="{{ url('/users_log') }}">
+                                Users Log
+                    </a>
+                    <a class="adminside" href="{{ url('/borrowed') }}">
+                                Equipment Borrowed
+                    </a>
+                    <a class="adminside" href="{{ url('/Equipments') }}">
+                                Equipment
+                    </a>
+                    <a class="adminside" href="{{ url('/Reports') }}">
+                                Reports
+                    </a>
+                    <a class="adminside" href="{{ url('/Reports') }}">
+                                Archive
+                    </a>
+                    
+                </aside>
+            </div>
+        @endif
         @yield('content')
     </div>
 
