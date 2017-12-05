@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Auth;
 use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
-class RegisterController extends Controller
+class UserAddController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -30,56 +27,6 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    public function addUser(){
-        if(Auth::User()->role === "admin"){
-                return view('CRUD.Create');    
-            }
-       return redirect() -> route('home');
-    }
-
-    public function register(Request $request){
-        $this->validator($request->all())->validate();
-        
-        event(new Registered($user = $this->create($request->all())));
-        
-        return $this->registered($request, $user)?:redirect('users_record');
-    }
-    
-    public function destroy($id){
-         $task = User::findOrFail($id);
-
-        $task->delete();
-
-        return redirect()->route('users_record');
-    }
-
-    public function edit($id)
-    {
-        $task = User::findOrFail($id);
-
-        return view('CRUD.Update', compact('crud','id'))->withTask($task);
-    }
-
-    public function update($id, Request $request)
-    {
-        $task = User::findOrFail($id);
-
-        $this->validate($request, [
-            'name' => 'required|string|min:6',
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-
-        $task->update([
-            'name' => $request['name'],
-            'username' => $request['username'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
-        ]);
-
-        return redirect()->route('users_record');
-    }
     /**
      * Create a new controller instance.
      *
@@ -87,8 +34,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        //return view('CRUD.Create');
-        return redirect() -> route('admin'); 
+        $this->middleware('guest');
     }
 
     /**
@@ -125,5 +71,10 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             //'security' => bcrypt($data['security']),
         ]);
+    }
+
+    public function index()
+    {
+        return view('User_CRUD.UserAdd');
     }
 }

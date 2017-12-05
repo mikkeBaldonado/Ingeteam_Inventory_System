@@ -84,7 +84,21 @@
                 height: 20px;
                 font-size: 10px;
             }
-
+            .profile{
+                text-align: left;
+                padding: 5px;
+            }
+            .profile span{
+                color: black;
+            }
+            .profile h3{
+                color: red;
+            }
+            .addUser{
+                float: right;
+                margin-top: -60px;
+                padding: 20px;
+            }
         </style>
     </head>
 <body>
@@ -114,52 +128,91 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        <li class="headerNavigation">
-                            <a class="navbar-brand" href="{{ url('/users_record') }}">
-                                Users Record
-                            </a>
-                        </li>
-                        <li class="headerNavigation">
-                            <a class="navbar-brand" href="{{ url('/users_log') }}">
-                                Users Log
-                            </a>
-                        </li>
-                        <li class="headerNavigation">
-                            <a class="navbar-brand" href="{{ url('/Equipments') }}">
-                                Equipment
-                            </a>
-                        </li>
-                        <li class="headerNavigation">
-                            <a class="navbar-brand" href="{{ url('/Reports') }}">
-                                Reports
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                    @if (Auth::user()->role==='admin')
+                        <ul class="nav navbar-nav navbar-right">
+                            <!-- Authentication Links -->
+                            <li class="headerNavigation">
+                                <a class="navbar-brand" href="{{ url('/users_record') }}">
+                                    Users Record
+                                </a>
+                            </li>
+                            <li class="headerNavigation">
+                                <a class="navbar-brand" href="{{ url('/users_log') }}">
+                                    Users Log
+                                </a>
+                            </li>
+                            <li class="headerNavigation">
+                                <a class="navbar-brand" href="{{ url('/Equipments') }}">
+                                    Equipment
+                                </a>
+                            </li>
+                            <li class="headerNavigation">
+                                <a class="navbar-brand" href="{{ url('/Reports') }}">
+                                    Reports
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                       Logout
-                                    </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                           Logout
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    @else
+                        <ul class="nav navbar-nav navbar-right">
+                            <!-- Authentication Links -->
+                            <li class="headerNavigation">
+                                <a class="navbar-brand" href="{{ url('/users_record') }}">
+                                    Profile
+                                </a>
+                            </li>
+                            <li class="headerNavigation">
+                                <a class="navbar-brand" href="{{ url('/Equipments') }}">
+                                    Equipment
+                                </a>
+                            </li>
+                            <li class="headerNavigation">
+                                <a class="navbar-brand" href="{{ url('/Reports') }}">
+                                    Reports
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                           Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    @endif
                 </div>
             </div>
         </nav>
-
         @yield('content')
     </div>
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Auth;
 
 class UsersRecordController extends Controller
 {
@@ -22,14 +21,6 @@ class UsersRecordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
-         $task = Equipments::findOrFail($id);
-
-        $task->delete();
-
-        return redirect()->route('Equipments');
-    }
-    
     public function index()
     {
         return view('Functional.users_record');
@@ -44,8 +35,7 @@ class UsersRecordController extends Controller
         }
         else
         {
-            $user = Auth::user();
-            return view('Functional.users_record')->with(['user' => $user]);
+            return view('Functional.users_record');
         }
     }
 }

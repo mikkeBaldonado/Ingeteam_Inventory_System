@@ -5,10 +5,20 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use Notifiable;
 
+    protected $guard = 'Auth::admin';
+    public function handle($request, Closure $next){
+
+	    if ( Auth::check() && Auth::user()->role === "admin" ){
+		
+		    return $next($request);
+		}
+
+    	return redirect('home');
+	}
     /**
      * The attributes that are mass assignable.
      *
