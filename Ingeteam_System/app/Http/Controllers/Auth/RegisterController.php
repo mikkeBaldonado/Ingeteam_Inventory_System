@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use  Hash;
 class RegisterController extends Controller
 {
     /*
@@ -60,6 +61,9 @@ class RegisterController extends Controller
         $archive -> save();
 
         $task->delete();
+
+        $request->session()->flash('message.level', 'success');
+        $request->session()->flash('message.content', 'Successfully Deleted User!');
         
         return redirect()->route('users_record');
     }
@@ -81,7 +85,6 @@ class RegisterController extends Controller
                 'username' => 'required',
                 'email' => 'required',
                 'role' => 'required',
-                'password' => 'required|string|min:6|confirmed',
             ]);
 
             $task->update([
@@ -89,26 +92,105 @@ class RegisterController extends Controller
                 'username' => $request['username'],
                 'email' => $request['email'],
                 'role' => $request['role'],
-                'password' => bcrypt($request['password']),
             ]);
+            $task['updated_at'] = DB::raw('CURRENT_TIMESTAMP');
+            $task->save();
+                
+
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', 'Successfully Updated User!');
+            return redirect()->route('users_record');
         }else{
+            if(Hash::check($request->password, $task->password)) {
+                $this->validate($request, [
+                    'name' => 'required|string|min:6',
+                    'username' => 'required',
+                    'email' => 'required',
+                    'password' => 'required|string|min:6|confirmed',
+                ]);
+
+                $task->update([
+                    'name' => $request['name'],
+                    'username' => $request['username'],
+                    'email' => $request['email'],
+                    'password' => bcrypt($request['password']),
+                ]);
+                $task['updated_at'] = DB::raw('CURRENT_TIMESTAMP');
+                $task->save();
+
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', 'Successfully updated profile!');                
+
+                return redirect()->route('users_record');
+            } else {
+                
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', 'Profile not updated! Password not match.');
+                return view('CRUD.Update');
+            }
+            
+        }
+
+    }
+
+    public function reset($id)
+    {
+        $task = User::findOrFail($id);
+
+        return view('CRUD.ChangePassword', compact('crud','id'))->withTask($task);
+    }
+
+    public function changePassword($id, Request $request)
+    {
+        $task = User::findOrFail($id);
+
+        if(Auth::User()->role == 'Admin'){
             $this->validate($request, [
-                'name' => 'required|string|min:6',
-                'username' => 'required',
-                'email' => 'required',
                 'password' => 'required|string|min:6|confirmed',
             ]);
 
             $task->update([
-                'name' => $request['name'],
-                'username' => $request['username'],
-                'email' => $request['email'],
                 'password' => bcrypt($request['password']),
             ]);
+            
+            $task['updated_at'] = DB::raw('CURRENT_TIMESTAMP');
+            $task->save();
+                
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'Successfully change password!');
+
+            return redirect()->route('users_record');
+        }else{
+            if(Hash::check($request->password, $task->password)) {
+                $this->validate($request, [
+                    'password' => 'required|string|min:6',
+                    'new_password' => 'required|string|min:6|confirmed',
+                    
+                ]);
+
+
+                $task->update([
+                    'password' => bcrypt($request['new_password']),
+                ]);
+
+                $task['updated_at'] = DB::raw('CURRENT_TIMESTAMP');
+                $task->save();
+                
+
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', 'Successfully change password!');                
+
+                return redirect()->route('users_record');
+            } else {
+                
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', 'Password not match.');
+                return view('CRUD.ChangePassword');
+            }
+            
         }
 
-        return redirect()->route('users_record');
-    }
+    }    
     /**
      * Create a new controller instance.
      *

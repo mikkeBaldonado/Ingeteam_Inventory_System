@@ -46,6 +46,10 @@ Route::post('/Equipments/update/{id}', ['uses' => 'EquipmentsController@update',
 
 Route::get('/users_record/edit/{id}', ['uses' => 'Auth\RegisterController@edit', 'as' => 'users_record.edit']);		
 Route::post('/users_record/update/{id}', ['uses' => 'Auth\RegisterController@update', 'as' => 'users_record.update']);
+
+
+Route::get('/users_record/changepassword/{id}', ['uses' => 'Auth\RegisterController@reset', 'as' => 'users_record.password']);		
+Route::post('/users_record/updatepassword/{id}', ['uses' => 'Auth\RegisterController@changePassword', 'as' => 'users_record.change']);
 		
 Route::get('/Borrowed/edit/{id}', ['uses' => 'BorrowsController@edit', 'as' => 'Borrowed.edit']);		
 Route::post('/Borrowed/update/{id}', ['uses' => 'BorrowsController@update', 'as' => 'Borrowed.update']);

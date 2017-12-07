@@ -20,10 +20,14 @@
     	                	</tr>
 
                     		@foreach($data as $value)
-                                 @foreach($borrow as $borrowed)
+                            <?php 
+                                $borows = false;
+                                $returned = false; 
+                            ?>
+                                @foreach($borrow as $borrowed)
                                     @if($value->id == $borrowed->equipments_id AND $borrowed->updated_at == NULL)
                                         <?php
-                                            $borow = true;
+                                            $borows = true;
                                             break;
                                         ?>
                                     @elseif($borrowed->updated_at != NULL)
@@ -32,12 +36,12 @@
                                         ?>
                                     @else
                                         <?php 
-                                            $borow = false; 
+                                            $borows = false; 
                                         ?>
                                     @endif    
                                 @endforeach
 
-                                <?php if($borow === true){ ?>
+                                <?php if($borows === true){ ?>
                                 <tr>
                                         <td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>
@@ -141,11 +145,14 @@
                                 <td> Action </td>
                             </tr>
                             @foreach($data as $value)
-                                
+                            <?php 
+                                $borows = false;
+                                $returned = false; 
+                            ?>
                                 @foreach($borrow as $borrowed)
                                     @if($value->id == $borrowed->equipments_id AND $borrowed->updated_at == NULL)
                                         <?php
-                                            $borow = true;
+                                            $borows = true;
                                             break;
                                         ?>
                                     @elseif($borrowed->updated_at != NULL)
@@ -154,12 +161,12 @@
                                         ?>
                                     @else
                                         <?php 
-                                            $borow = false; 
+                                            $borows = false; 
                                         ?>
                                     @endif    
                                 @endforeach
                                 
-                                <?php if($borow === true){ ?>
+                                <?php if($borows === true){ ?>
                                     <tr>
                                         <td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>

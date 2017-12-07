@@ -11,6 +11,6 @@ class borrowed extends Model
     protected $fillable = [
         'name', 'email', 'equipments_id','parts', 'condition',
     ];
-    const UPDATED_AT=NULL;
+    public $timestamps = false;
 
 }

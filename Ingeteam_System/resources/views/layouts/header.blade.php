@@ -90,12 +90,45 @@
             .profile{
                 text-align: left;
                 padding: 5px;
-            }
-            .profile span{
-                color: black;
+                background-color: white;
             }
             .profile h3{
-                color: red;
+                color: black;
+            }
+            .name{
+                text-decoration: none;
+                text-align: center;
+                font-family: "Raleway-B", sans-serif;
+                font-size: 24px;
+                color: #000;
+                font-weight: 400;
+            }
+            .below-name{
+                text-decoration: none;
+                text-align: center;
+                font-family: "Raleway", sans-serif;
+                font-size: 16px;
+                
+            }
+            .bold-text{
+                text-decoration: none;
+                font-family: "Raleway-B", sans-serif;
+                font-size: 18px;
+                color: #fff;
+                margin-left: 30px;
+            }
+            .below-text{
+                text-decoration: none;
+                font-family: "Raleway", sans-serif;
+                font-size: 20px;
+                margin-left: 30px;
+                color: #e8eef7;
+            }
+            .profile-desc{
+                background-color: dimgray;
+                padding: 10px;
+                margin-left: 120px;
+                margin-right: 120px;
             }
             .addUser{
                 float: right;

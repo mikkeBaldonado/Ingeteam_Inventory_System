@@ -21,8 +21,9 @@ class CreateEquipmentsTable extends Migration
             $table->string('hs_code');
             $table->string('condition');
             $table->string('users_id');
-            $table->timestamp('created_at')->useCurrent();
+            // Option 2:
             $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
 
         });
     }

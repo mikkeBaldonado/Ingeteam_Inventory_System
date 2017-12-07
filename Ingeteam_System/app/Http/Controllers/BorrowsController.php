@@ -107,7 +107,11 @@ class BorrowsController extends Controller
                 'condition' => $request['condition'],
             ]);
 
-            $borrow->updated_at = $task['updated_at'];
+            $task['updated_at'] = DB::raw('CURRENT_TIMESTAMP');
+            $task->save();
+
+
+            $borrow['updated_at'] = DB::raw('CURRENT_TIMESTAMP');
             $borrow->save();
 
             return redirect()->route('Borrows');
@@ -129,6 +133,7 @@ class BorrowsController extends Controller
             'parts' => 'required|string|max:255',
             'condition' => 'required|string|min:4',
         ]);
+        $request['updated_at'] = NULL;
 
         $input = $request->all();
 

@@ -77,28 +77,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
-
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                                </div>
-                            </div>
-
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <a onclick="return myFunction();" href="{{ url('/users_record') }}"><button type="submit" class="btn btn-primary">
@@ -110,6 +88,7 @@
                         </form>
                     </div>
                 @else
+                    
                     <div class="panel-heading">
                         <a href="{{ url('/users_record') }}" >
                             <button type="submit" class="btn btn-primary" style="background-color: gray">
@@ -119,6 +98,11 @@
                         <center> Edit Profile </center>
                     </div>
 
+                    @if(session()->has('message.level'))
+                        <div class="alert alert-{{ session('message.level') }}"> 
+                            {!! session('message.content') !!}
+                        </div>
+                    @endif
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('users_record.update', [Auth::user()->id]) }}">
                             {{ csrf_field() }}
