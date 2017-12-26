@@ -44,6 +44,9 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         
         event(new Registered($user = $this->create($request->all())));
+
+        $request->session()->flash('message.level', 'success');
+        $request->session()->flash('message.content', 'Successfully Added User!');
         
         return $this->registered($request, $user)?:redirect('users_record');
     }

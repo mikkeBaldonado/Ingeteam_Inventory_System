@@ -7,12 +7,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="{{ url('/Equipments') }}" >
-                        <button type="submit" class="btn btn-primary" style="background-color: gray">
+                        <button type="submit" class="btn btn-primary" style="background-color: maroon;">
                             BACK
                         </button>
                     </a>
-                    <center>Equipments Update</center>
                 </div>
+                @if(session()->has('message.level'))
+                    <div class="alert alert-{{ session('message.level') }}"> 
+                        {!! session('message.content') !!}
+                    </div>
+                @endif
                 @if (Auth::user()->role==='Admin')
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="{{ route('Equipments.update',$id)  }}">

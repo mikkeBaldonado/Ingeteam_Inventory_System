@@ -17,7 +17,7 @@
     	                	</tr>
                             @foreach($data as $value)
 
-                                <tr>
+                                <tr class="tableValue">
                                     <td>{{ $value -> name}}</td>
                                     <td>{{ $value -> email}}</td>
                                     <td>{{ $value -> action}}</td>

@@ -36,6 +36,7 @@ Route::group(array('prefix'=>'administration','middleware' => ['auth', 'admin'])
 		
   });
 
+Route::get('/welcome', 'Auth\LoginController@logo')->name('welcome');
 
 Route::get('/archive_users', 'ArchiveUsersController@index')->name('archive_users');
 

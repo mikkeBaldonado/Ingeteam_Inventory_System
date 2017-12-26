@@ -21,7 +21,7 @@
     	                	</tr>
                             @foreach($data as $value)
                                 @if($value->updated_at == NULL)
-                                    <tr>
+                                    <tr class="tableValue">
                                         <td>{{ $value -> name}}</td>
                                         <td>{{ $value -> email}}</td>
                                         <td>{{ $value -> equipments_id }}</td>
@@ -29,11 +29,11 @@
                                         <td>{{ $value -> condition}}</td>
                                         <td>{{ $value -> created_at}}</td>
                                         <td>{{ $value -> updated_at}}</td>
-                                        <td><a href="{{ route('Borrowed.edit',[$value->id])}}"> <button>Update</button></a>
+                                        <td><a href="{{ route('Borrowed.edit',[$value->id])}}"> <button class="btn btn-secondary btn-sm">Update</button></a>
                                         </td>
                                     </tr>
                                 @else
-                                    <tr>
+                                    <tr class="tableValue">
                                         <td>{{ $value -> name}}</td>
                                         <td>{{ $value -> email}}</td>
                                         <td>{{ $value -> equipments_id }}</td>

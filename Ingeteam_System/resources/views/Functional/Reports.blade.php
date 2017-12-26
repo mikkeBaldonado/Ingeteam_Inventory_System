@@ -23,7 +23,7 @@
     						</tr>
                                 @foreach($data as $value)
 
-                        		<tr>
+                        		<tr class="tableValue">
                         			@if ($value -> condition === "Good")
     	                    			<td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>
@@ -47,7 +47,7 @@
         	                </tr>
         	                @foreach($data as $value)
 
-                        		<tr>
+                        		<tr class="tableValue">
                         			@if ($value -> condition === "Defective")
     	                    			<td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>
@@ -71,7 +71,7 @@
         	                </tr>
         	                @foreach($data as $value)
 
-                        		<tr>
+                        		<tr class="tableValue">
                         			@if ($value -> condition === "To be Replaced")
     	                    			<td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>
@@ -106,7 +106,7 @@
                             </tr>
                                 @foreach($data as $value)
 
-                                <tr>
+                                <tr class="tableValue">
                                     @if ($value -> condition === "Good")
                                         <td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>
@@ -130,7 +130,7 @@
                             </tr>
                             @foreach($data as $value)
 
-                                <tr>
+                                <tr class="tableValue">
                                     @if ($value -> condition === "Defective")
                                         <td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>
@@ -154,7 +154,7 @@
                             </tr>
                             @foreach($data as $value)
 
-                                <tr>
+                                <tr class="tableValue">
                                     @if ($value -> condition === "To be Replaced")
                                         <td>{{ $value -> id}}</td>
                                         <td>{{ $value -> sap}}</td>

@@ -20,13 +20,14 @@
                 width: 100%;
                 height: 70px;
                 color: white;
-                background-color: gray;
+                background-color: maroon;
                 color: white;
             }
             .navbar-default .navbar-brand{
                 color: white;
                 font-size: large;
             }
+            
             .dropdown{
                 margin-right: -70px;
             }
@@ -34,6 +35,13 @@
                 color: white;
                 font-size: large;
                 margin-right: 20px;
+            }
+            .navbar-default .navbar-nav>li>a:hover{
+                color: maroon;
+                background-color: white;
+                font-size: large;
+                margin-right: 20px;
+                border-radius: 5px;
             }
             .functions{
 
@@ -48,7 +56,7 @@
                 margin-top: -24px;
                 margin-bottom: 0px;
                 height: 630px;
-                width: 900px;
+                width: 1020px;
             }
             .logo{
                 width: 220px;
@@ -66,25 +74,29 @@
             .tableName{
                 text-align: center;
                 font-weight: bold;
-                background-color: gray;
+                background-color: maroon;
                 color: white;
             }
             .tableName td{
                 color: white;
             }
+            .tableValue{
+                font-weight: bold;
+            }
+            .tableValue td{
+                color: black;
+            }
             table tbody tr{
                 padding: 5px;
-                border: 2px solid gray;
+                border: 2px solid maroon;
             }
             
             table td{
-                border: 2px solid gray;
+                border: 2px solid maroon;
                 padding: 3px;
                 color: gray;
             }
             tr button{
-                width: 50px;
-                height: 20px;
                 font-size: 10px;
             }
             .profile{
@@ -94,6 +106,9 @@
             }
             .profile h3{
                 color: black;
+            }
+            .info{
+                font-weight: bold;
             }
             .name{
                 text-decoration: none;
@@ -116,6 +131,7 @@
                 font-size: 18px;
                 color: #fff;
                 margin-left: 30px;
+                font-weight: bold;
             }
             .below-text{
                 text-decoration: none;
@@ -125,7 +141,7 @@
                 color: #e8eef7;
             }
             .profile-desc{
-                background-color: dimgray;
+                background-color: maroon;
                 padding: 10px;
                 margin-left: 120px;
                 margin-right: 120px;
@@ -139,6 +155,7 @@
                 overflow: hidden;
                 border: 1px solid #ccc;
                 background-color: #f1f1f1;
+                font-weight: bold;
             }
 
             /* Style the buttons inside the tab */
@@ -176,19 +193,59 @@
             aside{
                 float: left;
                 color: white;
-                padding: 20px;
+                margin: 20px;
+                width: 100%;
+                text-decoration: none;
             }
             .adminside{
-                color: gray;
+                color: black;
                 font-weight: 10px;
                 font-size: 20px;
                 display: block;
+                text-decoration: none;
+            }
+            aside a{
+
+            }
+            aside a:hover{
+                background-color: maroon;
+                color: white;
+                text-decoration: none;
+                width: 100%;
+
             }
             #admin_field{
                 margin-left: 50px;
             }
             #admin_panel{
 
+            }
+            a{
+                text-decoration: none;
+                font-weight: bold;
+                color: black;
+            }
+            a:hover{
+                text-decoration: none;
+                color: maroon;
+            }
+            .btn-sm{
+                font-weight: bold;
+            }
+            .btn-sm:hover{
+                font-weight: bold;
+                background-color: maroon;
+                color: white;
+            }
+            .btn-primary{
+                font-weight: bold;
+            }
+            .btn-info{
+                background-color: #71a5f7;
+            }
+            .tableValue:hover{
+                background-color: #bbd3f9;
+                color: maroon;
             }
         </style>
     </head>
@@ -293,17 +350,17 @@
         @if (Auth::user()->role==='Admin')
         <div id="admin_nav">
                 <aside>
-                    <a class="adminside" href="{{ url('/users_record') }}">
+                    <a class="adminside" href="{{ url('/users_record') }}" >
                             Users Record
                     </a>
                     <a class="adminside" href="{{ url('/users_log') }}">
                                 Users Log
                     </a>
                     <a class="adminside" href="{{ url('/borrowed') }}">
-                                Equipment Borrowed
+                                Borrowed Equipments 
                     </a>
                     <a class="adminside" href="{{ url('/Equipments') }}">
-                                Equipment
+                                Equipments List
                     </a>
                     <a class="adminside" href="{{ url('/Reports') }}">
                                 Reports

@@ -22,7 +22,7 @@
                             </tr>
                             @foreach($users as $value)
 
-                                <tr>
+                                <tr class="tableValue">
                                     <td>{{ $value -> id}}</td>
                                     <td>{{ $value -> name}}</td>
                                     <td>{{ $value -> username }}</td>
@@ -45,12 +45,12 @@
                             </tr>
                             @foreach($equipments as $value)
 
-                                <tr>
+                                <tr class="tableValue">
                                     <td>{{ $value -> sap}}</td>
                                     <td>{{ $value -> parts}}</td>
                                     <td>{{ $value -> units }}</td>
                                     <td>{{ $value -> hs_code}}</td>
-                                    <td>{{ $value -> conditions}}</td>
+                                    <td>{{ $value -> condition}}</td>
                                 </tr>
                             @endforeach
                         </table>

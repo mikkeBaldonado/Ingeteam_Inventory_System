@@ -38,6 +38,9 @@ class LoginController extends Controller
         }
        return redirect()->back();
     }
+    public function logo(){
+        return view('welcome');
+    }
     /**
      * Where to redirect users after login.
      *

@@ -24,7 +24,7 @@
             header{
                 width: 100%;
                 height: 70px;
-                background-color: gray;
+                background-color: maroon;
                 color: white;
             }
             #login_header{
@@ -40,7 +40,7 @@
                 height: 30px;
             }
             .form-group{
-                margin-right: -12px;
+                margin-right: 0px;
 
             }
             .has-error{
@@ -56,12 +56,11 @@
                 margin-right: -80px;
                 margin-left: -11px;
                 font-weight: bold;
-                background-color: gray;
-                border-color: gray;
+                background-color: maroon;
             }
             .btn-primary:hover{
                 background-color: white;
-                color: gray;
+                color: maroon;
             }
             .full-height {
                 height: 100vh;
@@ -135,6 +134,7 @@
                 float: left;
                 margin-left: -750px;
                 margin-top: 168px;
+                color: black;
             }
             .system span{
                 margin-left: 20px;
@@ -183,7 +183,7 @@
                             {{ csrf_field() }}
 
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <label for="email" class="col-md-4 control-label">Username</label>
+                                    <label for="email" class="col-md-4 control-label" style="font-size: 15px;">E-mail</label>
 
                                     <div class="col-md-6">
                                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
@@ -197,7 +197,7 @@
                                 </div>
 
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label for="password" class="col-md-4 control-label">Password</label>
+                                    <label for="password" class="col-md-4 control-label" style="font-size: 15px;" >Password</label>
 
                                     <div class="col-md-6">
                                         <input id="password" type="password" class="form-control" name="password" required>

@@ -6,6 +6,7 @@ use Auth;
 use App\Equipments;
 use App\User;
 use App\borrowed;
+use App\Archive_equipments;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -40,13 +41,13 @@ class EquipmentsController extends Controller
 
     public function getData()
     {
-        $data['data'] = DB::table('equipments') -> get();
+        $data['data'] = DB::table('equipments')->orderBy('id', 'desc')->get();
 
         if(count($data) > 0)
         {
             return view('Functional.Equipments')
-                ->with('data', DB::table('equipments') -> get())
-                ->with('borrow', DB::table('borrowed') -> get()); 
+                ->with('data', DB::table('equipments')->orderBy('id', 'desc')->get())
+                ->with('borrow', DB::table('borrowed')->orderBy('id', 'desc')->get()); 
         }
         else
         {
@@ -58,18 +59,20 @@ class EquipmentsController extends Controller
     public function destroy($id)
     {
         $task = Equipments::findOrFail($id);
-        $archive = DB::table('archive_equipments')->insertGetId(array(
-            
-            'id' => $task['id'],
-            'sap' => $task['sap'],
-            'parts' => $task['parts'],
-            'units' => $task['units'],
-            'hs_code' => $task['hs_code'],
-            'conditions' => $task['condition']
-        ));
+        $archive = new Archive_equipments;
+
+        $archive->id = $task['id'];
+        $archive->sap = $task['sap'];
+        $archive->parts = $task['parts'];
+        $archive->units = $task['units'];
+        $archive->hs_code = $task['hs_code'];
+        $archive->condition = $task['condition'];
+        $archive->save();
         
         $task->delete();
-
+        
+        session()->flash('message.level', 'success');
+        session()->flash('message.content', 'Successfully Deleted Equipment!');
         return redirect()->route('Equipments');
     }
 
@@ -96,19 +99,21 @@ class EquipmentsController extends Controller
                 'parts' => $request['parts'],
                 'hs_code' => $request['hs_code'],
                 'condition' => $request['condition'],
-                'users_id' => $request['users_id'],
             ]);
+
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'Successfully Updated Equipment!');
 
         $users = User::findOrFail($request['users_id']); //dapat dili id
 
-            $action = 'Updated equipment ' . $task->parts;
+            $action = 'Updated equipment ' . $task->parts . ' to ' . $request['condition'];
             (new UsersLogController)->store($users['id'], $action);
 
             return redirect()->route('Equipments');
     }
 
     public function reports(){
-        $data['data'] = DB::table('equipments') -> get();
+        $data['data'] = DB::table('equipments')->orderBy('id', 'desc')->get();
 
         if(count($data) > 0)
         {
@@ -122,14 +127,6 @@ class EquipmentsController extends Controller
         
     }
 
-    public function checker(){
-        $data['data'] = DB::table('equipments') -> get();
-
-        if(count($data) > 0)
-        {
-            return $data;
-        }
-    }
     /**
      * Create a new controller instance.
      *
@@ -145,27 +142,11 @@ class EquipmentsController extends Controller
         $this->validate($request, [
             'sap' => 'required|string|max:255',
             'parts'  => 'required|string|max:255',
-            'units' => 'required|string|max:255',
-            'hs_code' => 'required|string|min:4',
+            'units' => 'required|int|max:255',
+            'hs_code' => 'required|string|min:4|max:255',
             'condition' => 'required|string|min:4',
         ]);
-        /*$equipment = Equipments::findOrFail($request['parts']);
-        
-        $request['sap'] = $equipment['sap'];
-        $request['hs_code'] = $equipment['hs_code'];
-        */
-/*
-        $data = $this->checker();
-        $task = Equipments::findOrFail($request['parts']);
 
-        foreach ($data->parts as $value) {
-            if($value === $request['parts']){
-                $request['sap'] = $task['sap'];
-                $request['parts'] = $task['parts'];
-                $request['hs_code'] = $task['hs_code'];
-            }
-        }
-*/
         $unit = $request['units'];
         if($request['units'] > 1){
             while($request['units'] != 0){
@@ -182,9 +163,14 @@ class EquipmentsController extends Controller
                 $request['units'] = $request['units'] - 1;
                 $unit = $request['units'];
             }
+                $request->session()->flash('message.level', 'success');
+                $request->session()->flash('message.content', 'Successfully Added Equipment!');
         }else{
             $input = $request->all();    
             Equipments::create($input);
+            
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'Successfully Added User!');
         }
 
 

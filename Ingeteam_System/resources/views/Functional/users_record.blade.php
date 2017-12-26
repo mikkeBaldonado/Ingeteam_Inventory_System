@@ -25,44 +25,32 @@
                                 </tr>
 
                                 @foreach($data as $value)
-
-                                <tr>
-                                    <td>{{ $value -> id}}</td>
-                                    <td>{{ $value -> name}}</td>
-                                    <td>{{ $value -> username }}</td>
-                                    <td>{{ $value -> email}}</td>
-                                    <td>{{ $value -> role}}</td>
-                                    <td><a href="{{ route('users_record.edit',[$value->id])}}"> <button>Update</button></a>&nbsp;
-                                        <a onclick="return myFunction();" href="{{ route('users_record.delete',[$value->id])}}"><button>Delete</button></a>&nbsp;
-                                        <a href="{{ route('users_record.password',[$value->id])}}"> <button>Reset</button></a>
-                                        <!--<button data-toggle="modal" data-target="#delete">Delete</button> -->
-                                        <!--
-                                        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"style="color: gray;">
-                                                         <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="modal-body" id="delete">
-                                                      <p>Are you sure you want to delete the existing file?</p>
-                                                    </div>
-                                                    
-                                                    <div class="modal-footer">
-                                                        <button data-dismiss="modal">Close</button>
-                                                          
-                                                        <a href="{{ route('users_record.delete',[$value->id])}}">
-                                                            <button>Confirm</button> 
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        -->
-                                    </td>
-                                </tr>
+                                    @if ($value->role ==='Admin')
+                                        <tr class="tableValue">
+                                            <td>{{ $value -> id}}</td>
+                                            <td>{{ $value -> name}}</td>
+                                            <td>{{ $value -> username }}</td>
+                                            <td>{{ $value -> email}}</td>
+                                            <td>{{ $value -> role}}</td>
+                                            <td><a href="{{ route('users_record.edit',[$value->id])}}"> <button  class="btn btn-secondary btn-sm">Update</button></a>&nbsp;
+                                                <a href="{{ route('users_record.password',[$value->id])}}"> <button class="btn btn-secondary btn-sm">Reset</button></a>
+                                                
+                                            </td>
+                                        </tr>
+                                    @else
+                                        <tr class="tableValue">
+                                            <td>{{ $value -> id}}</td>
+                                            <td>{{ $value -> name}}</td>
+                                            <td>{{ $value -> username }}</td>
+                                            <td>{{ $value -> email}}</td>
+                                            <td>{{ $value -> role}}</td>
+                                            <td><a href="{{ route('users_record.edit',[$value->id])}}"> <button class="btn btn-secondary btn-sm">Update</button></a>&nbsp;
+                                                <a onclick="return myFunction();" href="{{ route('users_record.delete',[$value->id])}}"><button class="btn btn-danger btn-sm">Delete</button></a>&nbsp;
+                                                <a href="{{ route('users_record.password',[$value->id])}}"> <button class="btn btn-secondary btn-sm">Reset</button></a>
+                                                
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </table>
                     </center>
@@ -87,11 +75,13 @@
                                 
                             </center>
                             <center>
-                                <p class="name">{{ Auth::user()->name }}</p>
-                                <p class="below-name uk-padding-remove">
-                                    {{ Auth::user()->role }}
-                                    <br>{{ Auth::user()->email }}
-                                </p>
+                                <div class="info">
+                                    <p class="name">{{ Auth::user()->name }}</p>
+                                    <p class="below-name uk-padding-remove">
+                                        {{ Auth::user()->role }}
+                                        <br>{{ Auth::user()->email }}
+                                    </p>
+                                </div>
                             </center>
                             <div class="profile-desc">
                                 <p class="bold-text">USER ID: 

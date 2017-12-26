@@ -21,18 +21,24 @@
                 width: 100%;
                 height: 70px;
                 color: white;
-                background-color: gray;
+                background-color: maroon;
                 color: white;
             }
             .navbar-default .navbar-brand{
                 color: white;
                 font-size: large;
             }
+
             .dropdown{
                 margin-right: -70px;
             }
             .navbar-default .navbar-nav>li>a{
                 color: white;
+                font-size: large;
+            }
+            .navbar-default .navbar-nav>li>a:hover{
+                color: maroon;
+                background-color: white;
                 font-size: large;
             }
             .functions{
@@ -71,7 +77,7 @@
 
                     <!-- Branding Image -->
                     
-                        <a class="navbar-brand" href="{{ url('/home') }}">
+                        <a class="navbar-brand" href="{{ url('/welcome') }}">
                             <img src="{{ asset('images/whiteLogo.png') }}" class="logo">
                         </a>
                     
@@ -88,7 +94,6 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

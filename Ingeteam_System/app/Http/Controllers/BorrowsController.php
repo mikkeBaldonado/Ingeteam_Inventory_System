@@ -41,7 +41,7 @@ class BorrowsController extends Controller
     public function getData()
     {
         if(Auth::user()->role == 'Admin'){
-            $data['data'] = DB::table('borrowed') -> get();
+            $data['data'] = DB::table('borrowed')->orderBy('id', 'desc')->get();
 
             if(count($data) > 0)
             {
@@ -56,34 +56,6 @@ class BorrowsController extends Controller
         return back();
     }
 
-    /*protected function store($id, $user, Request $request)
-    {
-        $task = Equipments::findOrFail($id);
-        $task2 = User::findOrFail($user);
-        $input = Auth::borrowed();
-        /*$art = new borrowed;
-        $art->name = $name;
-        $art->email = $email;
-        $art->parts = $parts;
-        $art->condition = $condition;
-        $art->save();
-        
-        $this->validate($request, [
-            'name' =>  Auth::User($user)->name,
-            'email'  => Auth::User($user)->email,
-            'parts' =>  Auth::Equipments($id)->parts,
-            'condition' =>  Auth::Equipments($id)->condition,
-        ]);
-
-        $input->create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'parts' => $request['parts'],
-            'condition' => $request['condition'],
-        ]);
-        return redirect()->route('Equipments');
-        
-    }*/
     public function edit($id)
     {
         $task = borrowed::findOrFail($id);
@@ -114,6 +86,14 @@ class BorrowsController extends Controller
             $borrow['updated_at'] = DB::raw('CURRENT_TIMESTAMP');
             $borrow->save();
 
+            $users = User::findOrFail(Auth::User()->role === "Admin"); //dapat dili id
+
+            $action = 'Updated borrowed equipment ' . $task->parts . ' to ' . $request['condition'];
+            (new UsersLogController)->store(Auth::User()->role === "Admin", $action);
+
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'Equipments Returned.');
+
             return redirect()->route('Borrows');
         }
     }
@@ -138,6 +118,9 @@ class BorrowsController extends Controller
         $input = $request->all();
 
         borrowed::create($input);
+
+        $request->session()->flash('message.level', 'success');
+        $request->session()->flash('message.content', 'Successfully Borrowed Equipment!');
 
         return redirect()->route('Equipments');
     }
